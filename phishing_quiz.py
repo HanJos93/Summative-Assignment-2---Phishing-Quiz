@@ -28,34 +28,77 @@ class PhishingQuiz(tk.Tk):
         self.results = tk.IntVar(value=0)
         self.var_results = []
 
-        quiz_header = tk.Label(self, text="Buckinghamshire Council - Phishing 101", font=("Cabin", 64), bg="#2C2D84", fg="white")
-        quiz_header.pack(fill="x")
+        self.quiz_header = tk.Label(self, text="Buckinghamshire Council - Phishing 101", font=("Cabin", 64), bg="#2C2D84", fg="white")
+        self.quiz_header.pack(fill="x")
 
+        self.help_btn = tk.Button(self, command=self.help_messagebox, text="ℹ️", font=("Cabin", 30), anchor="center", justify="center", height=1, width=4)
+        self.help_btn.pack(anchor="nw")
+
+        self.username_label = tk.Label(self, text="Please enter your name", font=("Cabin", 30), bg="#F5F5F5", anchor="n", height=2, width=20, padx=10, pady=10)
+        self.username_field = tk.Entry(self, textvariable=self.username, font=("Cabin", 20), bg="white")
+        self.enter_button = tk.Button(self, command=self.username_validation, text="Enter", font=("Cabin", 20), bg="#F5F5F5", anchor="n", padx=2, pady= 2)
         self.username_entry()
-    
+
+        self.submit_button = tk.Button(text="Submit", command=self.record_data, font=("Cabin", 20))
+
     def username_entry(self):
-        tk.Label(self, text="Please enter your name", font=("Cabin", 20), bg="#F5F5F5", anchor="n", height=2, width= 20, padx=10, pady= 100).pack()
-        tk.Entry(self, textvariable=self.username, font=("Cabin", 20), bg="white").pack(pady=5)
-        tk.Button(self, command=self.generate_questions, text="Enter", font=("Cabin", 20), bg="#F5F5F5", anchor="n", padx=2, pady= 2).pack()
+        self.username_label.pack()
+        self.username_field.pack(pady=10)
+        self.enter_button.pack()
+
+    def username_validation(self):
+
+        self.complete_username = self.username.get()
+
+        if not re.search (r"[A-Z]", self.complete_username):
+            messagebox.showerror("Username Error", "Name must contain a capital letter")
+            return "Name should contain a capital"
+
+        if re.search(r"\d", self.complete_username):
+            messagebox.showerror("Username Error", "Name should not contain numbers")
+            return "Name should not contain numbers"
+        
+        if not re.fullmatch(r"[a-zA-Z-\s]+", self.complete_username):
+            messagebox.showerror("Username Error", "Name should only contain letters, hyphens or spaces")
+            return "Name should only contain letters"
+        
+        self.enter_button.config(state="disabled")
+        self.username_field.config(state="disabled")
+        self.generate_questions()
+
+
+    def help_messagebox(self):
+        messagebox.showinfo("Help", "To begin the quiz, please type your name in to the box and select the enter button. " \
+        "To finish the quiz select an answer in each of the multiple choice questions, then click the submit button.")
 
     def record_data(self):
-        user_name = self.username.get().strip()
+
+
+        name = self.complete_username.strip()
         current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        score = []
+        answers = []
         for var in self.var_results:
-            score.append(var.get())
+            answers.append(var.get())
+        
+        empty_question = -1
+        if answers.count(empty_question):
+            messagebox.showerror("Quiz Error", "All questions must be answered to submit")
+            return "All questions must be answered to submit"
 
-        with open("results.csv", "a", newline="") as results_file:
-            writer = csv.writer(results_file)
-            writer.writerow([user_name, score, current_time])
+        else:
+            with open("results.csv", "a", newline="") as results_file:
+                writer = csv.writer(results_file)
+                writer.writerow([name, answers, current_time])
+            messagebox.showinfo("Quiz Complete", "Thank you for participating in this quiz, your answers have been submitted")
+            self.destroy()
 
     def generate_questions(self):
         
         qnumber = 1
 
         for question in self.questions:
-            display_question = tk.Label (self, text=question["questions"], font=("Cabin", 20))
+            display_question = tk.Label (self, text=question["questions"], font=("Cabin", 16))
             display_question.pack(anchor="center", padx=40, pady=(20, 5))
 
             results = tk.IntVar(value=-1)
@@ -63,14 +106,13 @@ class PhishingQuiz(tk.Tk):
 
             option_value = 0
             for option in question["options"]:
-                answer_radiobtns = tk.Radiobutton(self, text=option, value=option_value, font=("Cabin", 16))
+                answer_radiobtns = tk.Radiobutton(self, text=option, variable=results, value=option_value, font=("Cabin", 12))
                 answer_radiobtns.pack(anchor="n", padx=20)
                 option_value += 1
 
             qnumber += 1
         
-        submit_button = tk.Button(text="Submit", command=self.record_data, font=("Cabin", 20))
-        submit_button.pack(anchor="s", padx=30)
+        self.submit_button.pack(anchor="s", padx=30)
             
 
 
