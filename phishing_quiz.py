@@ -56,30 +56,38 @@ class PhishingQuiz(tk.Tk):
 
         self.complete_username = self.username.get().title().strip() #Retrieves the username, removes white spaces and capitalises each word
 
-        #Checks if username is empty
-        if bool(self.complete_username) == False:
-            messagebox.showerror("Username Error", "Name can not be empty")
-            return "Name can not be empty"
-        
-        #Checks if username contains 3 or more characters
-        if len(self.complete_username) <= 2:
-            messagebox.showerror("Username Error", "Name can not be 3 or more characters")
-            return "Name can not be 3 or more characters"
+        try:
+            #Checks if username is empty
+            if bool(self.complete_username) == False:
+                messagebox.showerror("Username Error", "Name can not be empty")
+                raise ValueError ("Name can not be empty")
+            
+            #Checks if username contains 3 or more characters
+            elif len(self.complete_username) <= 2:
+                messagebox.showerror("Username Error", "Name can not be 3 or more characters")
+                raise ValueError ("Name can not be 3 or more characters")
 
-        #Checks if username contains over 30 characters
-        if len(self.complete_username) >= 30:
-            messagebox.showerror("Username Error", "Name can not be over 30 characters")
-            return "Name can not be over 30 characters"
+            #Checks if username contains over 30 characters
+            elif len(self.complete_username) >= 30:
+                messagebox.showerror("Username Error", "Name can not be over 30 characters")
+                raise ValueError ("Name can not be over 30 characters")
 
-        #Checks if username contains numbers
-        if re.search(r"\d", self.complete_username):
-            messagebox.showerror("Username Error", "Name can not not contain numbers")
-            return "Name should not contain numbers"
-        
-        #Checks if username contains special characters aside from hyphens or spaces
-        if not re.fullmatch(r"[a-zA-Z-\s]+", self.complete_username):
-            messagebox.showerror("Username Error", "Name can only contain letters, hyphens or spaces")
-            return "Name should only contain letters, hyphens or spaces"
+            #Checks if username contains numbers
+            elif re.search(r"\d", self.complete_username):
+                messagebox.showerror("Username Error", "Name can not not contain numbers")
+                raise ValueError ("Name should not contain numbers")
+            
+            #Checks if username contains special characters aside from hyphens or spaces
+            elif not re.fullmatch(r"[a-zA-Z-\s]+", self.complete_username):
+                messagebox.showerror("Username Error", "Name can only contain letters, hyphens or spaces")
+                raise ValueError ("Name should only contain letters, hyphens or spaces")
+            
+        except ValueError as err:
+            print(err)
+            return False
+        except RuntimeError as err:
+            print(err)
+            return False
         
         #Disables the username fields and displays the questions
         self.username_label.destroy()
