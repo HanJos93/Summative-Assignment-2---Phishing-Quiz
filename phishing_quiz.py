@@ -48,7 +48,7 @@ class PhishingQuiz(tk.Tk):
 
     def username_validation(self):
 
-        self.complete_username = self.username.get()
+        self.complete_username = self.username.get().title()
 
         if not re.search (r"[A-Z]", self.complete_username):
             messagebox.showerror("Username Error", "Name must contain a capital letter")
