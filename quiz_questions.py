@@ -21,5 +21,3 @@ def load_questions(filepath="quiz_questions.csv"):
 
     return questions
 
-print(load_questions())
-
