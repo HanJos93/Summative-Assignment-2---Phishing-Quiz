@@ -63,7 +63,7 @@ class PhishingQuiz(tk.Tk):
 
             option_value = 0
             for option in question["options"]:
-                answer_radiobtns = tk.Radiobutton(self, text=option, value=option_value, font=("Cabin", 20))
+                answer_radiobtns = tk.Radiobutton(self, text=option, value=option_value, font=("Cabin", 16))
                 answer_radiobtns.pack(anchor="n", padx=20)
                 option_value += 1
 
