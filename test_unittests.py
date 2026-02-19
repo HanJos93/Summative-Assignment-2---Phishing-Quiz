@@ -18,6 +18,15 @@ class UsernameTest(unittest.TestCase):
         username = "123Joshua Kneba"
         username = not re.search(r"\d", username)
         self.assertFalse(username)
+    
+    def test_username_special(self):
+        username = "Joshua Kneba!!!"
+        username = not re.fullmatch(r"[a-zA-Z-\s]+", username)
+        self.assertTrue(username)
+
+        username = "Ann-Marie"
+        username = not re.fullmatch(r"[a-zA-Z-\s]+", username)
+        self.assertFalse(username)
 
 class QuizQuestionsTest(unittest.TestCase):
     
