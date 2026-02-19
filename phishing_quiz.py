@@ -135,11 +135,11 @@ class PhishingQuiz(tk.Tk):
             score = score + 1
         else:
             score = score + 0
-        
+        score = str(score)
+
         """
         If no questions are blank, record the results in a csv file then end the quiz
         """
-        
         empty_question = -1
         if answers.count(empty_question):
             messagebox.showerror("Quiz Error", "All questions must be answered to submit")
@@ -149,7 +149,8 @@ class PhishingQuiz(tk.Tk):
             with open("results.csv", "a", newline="") as results_file:
                 writer = csv.writer(results_file)
                 writer.writerow([name, answers, score, current_time])
-            messagebox.showinfo("Quiz Complete", "Thank you for participating in this quiz, your answers have been submitted")
+            messagebox.showinfo("Quiz Complete","You scored " + score + "/5\n" + "\n" 
+                                "Thank you for participating in this quiz, your answers have been submitted.")
             self.destroy()
 
     def generate_questions(self):
