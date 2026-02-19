@@ -1,5 +1,11 @@
 # Buckinghamshire Council - Phishing 101
 
+## User Documentation
+
+This quiz was created using Visual Studio Code and I recommend installing it to ensure the quiz works. You can install VSCode here:  
+[Visual Studio Code - download](https://code.visualstudio.com/Download)
+
+Once installed or if you already have it, download the GitHub repository by hitting code 
 ## Introduction and Proposed MVP
 
 The Buckinghamshire Council is a large organisation with approximately 5000 employees and acts as the local authority for Buckinghamshire County. The organisation provides a vast array of service from adult’s and children’s social care to waste collection and even business licenses, permits and rates. With such a large variety of skills, knowledge and experience it is vital that everyone is on the same page when it comes to IT security, therefore I proposed a quiz that would ensure that those who take it understand the fundamentals of phishing attacks. As more systems become digitised cyber-attacks become increasingly common, understanding how the most frequent type of attack, phishing, works will serve to reduce the potential risks to the organisation. 
