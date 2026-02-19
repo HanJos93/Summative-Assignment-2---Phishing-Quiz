@@ -2,10 +2,24 @@
 
 ## User Documentation
 
-This quiz was created using Visual Studio Code and I recommend installing it to ensure the quiz works. You can install VSCode here:  
+This quiz has been developed using the Python programming language, please ensure you have Python installed before proceeding. You can install Python here:  
+[Python - Download](https://www.python.org/downloads/)  
+
+Visual Studio Code was used to build the quiz and I recommend installing it to ensure the quiz works as intended. You can install VSCode here:  
 [Visual Studio Code - download](https://code.visualstudio.com/Download)
 
-Once installed or if you already have it, download the GitHub repository by hitting code 
+Once installed or if you already have it, download the GitHub repository by clicking code and choosing 'Download ZIP' 
+<img width="1381" height="178" alt="image" src="https://github.com/user-attachments/assets/de070468-014d-4f57-91c5-06c95fb626a1" />
+
+After downloading the repository, locate the downloaded .zip file, right click it and select extract all.
+
+<img width="801" height="748" alt="image" src="https://github.com/user-attachments/assets/08841db8-e4f8-452a-b15b-84a26beebdb1" />  
+
+Open the extracted file and double click phishing_quiz.py, code will now open via Visual Studio Code. From here you can click the 'Play' button in the top right to start the quiz.  
+<img width="1390" height="278" alt="image" src="https://github.com/user-attachments/assets/0ffd0470-b857-42ab-83a3-14557da321c2" />  
+
+Once you submit your answers you can view the results in the file named 'results.csv'
+
 ## Introduction and Proposed MVP
 
 The Buckinghamshire Council is a large organisation with approximately 5000 employees and acts as the local authority for Buckinghamshire County. The organisation provides a vast array of service from adult’s and children’s social care to waste collection and even business licenses, permits and rates. With such a large variety of skills, knowledge and experience it is vital that everyone is on the same page when it comes to IT security, therefore I proposed a quiz that would ensure that those who take it understand the fundamentals of phishing attacks. As more systems become digitised cyber-attacks become increasingly common, understanding how the most frequent type of attack, phishing, works will serve to reduce the potential risks to the organisation. 
