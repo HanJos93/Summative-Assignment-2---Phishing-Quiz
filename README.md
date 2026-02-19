@@ -12,7 +12,7 @@ The quiz will ask a series of questions which tests awareness about the nature o
 
 To begin designing this quiz, I first considered what this quiz should look like and how users will interact with it. With this in mind, I decided on using the cloud-based design tool Figma to visualise the graphical user interface and simulate the customer journey. Below is the completed diagram.
 <img width="1523" height="754" alt="Figma Board" src="https://github.com/user-attachments/assets/19dd41c4-100a-4fb1-ace1-c94f550b72ab" />
-**Figure 1:**[ Wireframe](https://www.figma.com/design/N2lCCsXgoQUMk3etvyxnPV/Phishing-Quiz-GUI-Design?node-id=0-1&t=H2QeXzAVHVivouVx-1)
+**Figure 1:** [Wireframe](https://www.figma.com/design/N2lCCsXgoQUMk3etvyxnPV/Phishing-Quiz-GUI-Design?node-id=0-1&t=H2QeXzAVHVivouVx-1) developed on Figma
 
 Before building this visualisation I gathered examples of current Buckinghamshire Council employee training course and elected to use a similar layout and the exact colours used to represent the organisation. This ensures that it follows the brand guidelines as well as being recognisable to internal staff as a Buckinghamshire Council product. Designing the first frame of the quiz was the most important as it would set a design precedent that all following GUI frames, buttons and labels would need to adhere to maintain the integrity of the not only the quiz design but also the brand image. As the data this quiz generates needs to be stored permanently, it is vital that the user is required to enter the necessary information before being able to move on. Therefore, this first frame needed to be easy to understand and linear to reduce chances users become lost, as a result I decided to include only a quiz header, username entry field as well as a help button. The quiz header and help button are static elements which appear in all stages of the quiz. Once the user enters their name, they can select the enter button to confirm the name and move on to the quiz.
 
@@ -22,6 +22,7 @@ After designing the initial layout, the next step was to consider the style of q
 
 <img width="600" height="350" alt="image" src="https://github.com/user-attachments/assets/2ac898d2-101f-47ec-a18e-a4e78ad78d7e" />
 
+**Figure 2:** Functional and Non-functional requirements table
 
 ### Technical Stack Outline
 
@@ -57,7 +58,7 @@ Enables recording/reading of dates and times. This will be used to log the date/
 
 - Visual Studio Code
 
-VSCode is the environment the software will be built in using the Python programming language, this is due to its ability to run and display the output of code as well as set up a continous integration pipeline with this github repository.
+VSCode is the environment the software will be built in using the Python programming language, this is due to its ability to run and display the output of code as well as set up a continuous integration pipeline with this GitHub repository.
 
 <ins>Storage methods</ins>
 
@@ -69,12 +70,13 @@ The information the user enters will be stored in a .csv file due to their text 
 
 <img width="1278" height="1297" alt="image" src="https://github.com/user-attachments/assets/d90ba002-1b93-41d2-9130-834d5a68a2ec" />
 
+**Figure 3:** Class diagram developed on draw.io
 
 ## Development
 
 Before developing the quiz, the questions needed to be determined. To do this I used information from the Buckinghamshire Council's own phishing guidance and created questions which included answers relevant and specific to the organisation. These questions are stored in quiz_questions.csv.
 
-With the questions in a .csv file, these needed to be converted to a format easily to read from and manipulate. To achieve this I created a module which converts the data from the .csv into a Python dictionary that the main file could call from using the following code.
+With the questions in a .csv file, these needed to be converted to a format easily to read from and manipulate. To achieve this, I created a module which converts the data from the .csv into a Python dictionary that the main file could call from using the following code.
 ```python
 import csv
 
@@ -99,7 +101,7 @@ def load_questions(filepath="quiz_questions.csv"):
 
     return questions
 ```
-The reader variable ensures the script is only reading the csv and not making and changes to it. The dictionary (questions) creates a key for each row in the questions column and each question is assigned the value of the options in the same row, this results in a dictionary with 5 distinct questions ready for the main file to call upon. With this module complete, the quiz can now be developed.
+The reader variable ensures the script is only reading the csv and not making and changes to it. The dictionary (questions) creates a key for each row in the questions column, and each question is assigned the value of the options in the same row, this results in a dictionary with 5 distinct questions ready for the main file to call upon. With this module complete, the quiz can now be developed.
 
 The primary file is called phishing_quiz.py and contains the rest of the code necessary for the quiz to function. To begin I imported the quiz_questions module and defined a variable which is assigned the function which creates the questions dictionary.
 ```python
@@ -107,7 +109,7 @@ from quiz_questions import load_questions #Gets the quiz questions from quiz_que
 
 questions = load_questions()
 ```
-All of the remaining code sits within a super class ,PhishingQuiz, this allows me to access methods in the super class in all sub classes and definitions. The class contains the questions variable, allowing it to be called wherever needed.
+All of the remaining code sits within a super class, PhishingQuiz, this allows me to access methods in the super class in all sub classes and definitions. The class contains the questions variable, allowing it to be called wherever needed.
 ```python
 class PhishingQuiz(tk.Tk):
 
@@ -127,7 +129,7 @@ The following code block creates and places the help button on the GUI. The butt
 self.help_button = tk.Button(self, command=self.help_messagebox, text="ℹ️", font=("Cabin", 30), anchor="center", justify="center", height=1, width=4)
 self.help_button.pack(anchor="nw")
 ```
-When the help button is selected, the command it runs is defined below. In order to preserve the layout of the quiz the help menu was created as a messagebox allowing it to be accessed at any point without disrupting the flow of the user experience.
+When the help button is selected, the command it runs is defined below. In order to preserve the layout of the quiz the help menu was created as a message box allowing it to be accessed at any point without disrupting the flow of the user experience.
 ```python
 def help_messagebox(self):
 messagebox.showinfo("Help", "To begin the quiz, please type your name in to the box and select the enter button. " \
@@ -174,7 +176,7 @@ Once the question labels are generated, the multiple-choice buttons are created 
                 answer_radiobtns.pack(anchor="n", padx=20)
                 option_value += 1
 ```
-Finally once the user clicks the submit button to submit their answers, the results variable tracks which answers they chose and adds +1 to the score for each correct question.
+Finally, once the user clicks the submit button to submit their answers, the results variable tracks which answers they chose and adds +1 to the score for each correct question.
 ```python
 answers = []
         for var in self.var_results:
@@ -202,7 +204,7 @@ empty_question = -1
             messagebox.showerror("Quiz Error", "All questions must be answered to submit")
             return "All questions must be answered to submit"
 ```
-If no questions are left empty, the users information is written to a file named results.csv, displays a messagebox with the users results and closes the quiz.
+If no questions are left empty, the users information is written to a file named results.csv, displays a message box with the users results and closes the quiz.
 ```python
 with open("results.csv", "a", newline="") as results_file:
   writer = csv.writer(results_file)
@@ -214,4 +216,23 @@ self.destroy()
 
 ## Testing
 
-To test the code and functions of the script, I elected to use Pythons inbuilt unit testing framework. This is to reduce the amount libraries the need to be installed and imported into the code. I used a combination of automated and manual tests to ensure that any errors are caught before they have the opportunity to cause issues. To beign I performed a basic smoke test and uploaded to github to confirm the core functionality was working as intended.
+To test the code and functions of the script, I elected to use Pythons inbuilt unit testing framework. This is to reduce the amount libraries the need to be installed and imported into the code. I used a combination of automated and manual tests to ensure that any errors are caught before they have the opportunity to cause issues. To begin I performed a basic smoke test and uploaded to GitHub to confirm the core functionality was working as intended and the CI pipeline.
+<img width="1500" height="578" alt="image" src="https://github.com/user-attachments/assets/dfc4955e-cb31-4d11-bf8a-887e6a7ce684" />
+
+Once the smoke tests were confirmed to be passing, I began writing unit tests for the username entry field. This was to ensure that the name users’ input could not be unexpected or result in an error.
+<img width="671" height="799" alt="image" src="https://github.com/user-attachments/assets/32531a69-073e-4b2c-a953-26b8c3703cb0" />
+
+As we can see from the passing tests, names cannot have numbers or special characters but most importantly it does allow for names with hyphens separating them.
+
+Before incorporating the quiz_questions() function into the main code, it was important that I validate whether the function generates an output to do this with a unit test I wrote the following test case.
+<img width="617" height="598" alt="image" src="https://github.com/user-attachments/assets/74ffd76c-a57e-4faa-9676-66f86b87dece" />
+
+Below are the results of the manual testing performed
+
+<img width="575" height="816" alt="image" src="https://github.com/user-attachments/assets/73528337-9e15-48ed-be20-14481ac2998d" />
+
+<img width="566" height="819" alt="image" src="https://github.com/user-attachments/assets/c5a67662-1d8b-4373-8ee2-822b7e359497" />
+
+**Figure 4:** Manual testing 
+
+## Technical Documentation
