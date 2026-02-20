@@ -256,3 +256,12 @@ Below are the results of the manual testing performed
 **Figure 4:** Manual testing 
 
 ## Technical Documentation
+
+## Evaluation
+
+Overall, I believe this project has been successful in achieving the goals it has set out to, assisting in bolstering knowledge on phishing cyber-attacks, providing software in line with brand guidelines and the necessary functional and non-functional requirements. However, it has also provided enumerable ideas and insights into how my software can be improved in future endeavours.  
+
+Through the design and development of this quiz I have learnt much about the types of considerations that need to be made when building software for an organisation such as brand consistency and intuitive user journeys. While I believe the user experience on the quiz is intuitive and user-friendly, the steps required to access the quiz such as installing Python and Visual Studio Code risk turning user’s aways as they may perceive these steps as cumbersome. I need to know more about converting my code into easily accessible executables to reduce the risk of losing users before they have the opportunity to access the software.  
+
+Although the code achieves the bulk of the requirements, upon reflection the scalability of the application, despite it supporting the addition of new questions, does suffer due to how they are displayed in the application window. Currently, the questions are all listed simultaneously which means adding more risks having them hidden off screen thus making the quiz impossible. To remedy this in future projects, I will learn from tkinter’s documentation and develop code to display one question at a time, which will enhance scalability.
+
