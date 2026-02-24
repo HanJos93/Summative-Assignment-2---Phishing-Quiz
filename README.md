@@ -265,17 +265,34 @@ Below are the results of the manual testing performed
 
 ## Technical Documentation
 
-All libraries used in development are included in all recent Python installtions. 
+All libraries used in development are included in all recent Python installations. The following steps ensure you are able to execute the code
 
 **1.** This program was developed on Python 3.13 and has been tested on later versions, please ensure you have Python 3.13 or higher. You can run the following commands in your terminal to check the version
 ```
 python -v
 ```
 **2.** Clone this repo 
-
-
-### Cloning the repo
-
+```
+git clone https://github.com/HanJos93/Summative-Assignment-2---Phishing-Quiz.git
+```
+**3.** To run the unit tests for the app, open and run the script test_unittests.py or copy the following command into your terminal
+```
+python -m unittest discover Summative-Assignment-2---Phishing-Quiz
+```
+**4.** To add additional questions to the quiz, open quiz_questions.csv and add your questions/answers under their respective headings. Then add extra if statements to the score calculation variable located in phishing_quiz.py for each added question.
+```python
+score = 0
+   if answers[0] == 2:
+      score = score + 1
+   if answers[1] == 3:
+      score = score + 1
+   if answers[2] == 1:
+      score = score + 1
+   if answers[3] == 1:
+      score = score + 1
+   if answers[4] == 3:
+      score = score + 1
+```
 ## Evaluation
 
 Overall, I believe this project has been successful in achieving the goals it has set out to, assisting in bolstering knowledge on phishing cyber-attacks, providing software in line with brand guidelines and the necessary functional and non-functional requirements. However, it has also provided enumerable ideas and insights into how my software can be improved in future endeavours.  
