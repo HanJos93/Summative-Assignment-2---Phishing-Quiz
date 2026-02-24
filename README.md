@@ -265,6 +265,15 @@ Below are the results of the manual testing performed
 
 ## Technical Documentation
 
+All libraries used in development are included in all recent Python installtions. 
+
+**1.** This program was developed on Python 3.13 and has been tested on later versions, please ensure you have Python 3.13 or higher. You can run the following commands in your terminal to check the version
+```
+python -v
+```
+**2.** Clone this repo 
+
+
 ### Cloning the repo
 
 ## Evaluation
