@@ -7,16 +7,21 @@ This quiz has been developed using the Python programming language, please ensur
 
 Visual Studio Code was used to build the quiz and I recommend installing it to ensure the quiz works as intended. You can install VSCode here:  
 [Visual Studio Code - download](https://code.visualstudio.com/Download)
-
+   
 Once installed or if you already have it, download the GitHub repository by clicking code and choosing 'Download ZIP' 
 <img width="1381" height="178" alt="image" src="https://github.com/user-attachments/assets/de070468-014d-4f57-91c5-06c95fb626a1" />
-
+**Figure 1:** _Screenshot of the GitHub repository code button_
+   
 After downloading the repository, locate the downloaded .zip file, right click it and select extract all.
 
-<img width="801" height="748" alt="image" src="https://github.com/user-attachments/assets/08841db8-e4f8-452a-b15b-84a26beebdb1" />  
+![Extract](https://github.com/user-attachments/assets/97954ba1-d998-4c9e-98d5-7e7bb2f3cd7b)
+**Figure 2:** _Animated GIF demonstrating .zip file extraction_
 
-Open the extracted file and double click phishing_quiz.py, code will now open via Visual Studio Code. From here you can click the 'Play' button in the top right to start the quiz.  
-<img width="1390" height="278" alt="image" src="https://github.com/user-attachments/assets/0ffd0470-b857-42ab-83a3-14557da321c2" />  
+Open the extracted file and double click phishing_quiz.py, code will now open via Visual Studio Code. From here you can click the 'Play' button in the top right to start the quiz.
+
+To begin, type your username and select the enter button. You will now be met with multiple choice questions of which you can answer in any order, make a selection for each question to submit and end the quiz.
+![Open Quiz](https://github.com/user-attachments/assets/b58dc5c4-ec4e-4ce8-bb82-09679276c3c0)
+**Figure 3:** _Animated GIF demonstrating how to open the quiz and how to start_
 
 Once you submit your answers you can view the results in the file named 'results.csv'
 
@@ -32,7 +37,7 @@ The quiz will ask a series of questions which tests awareness about the nature o
 
 To begin designing this quiz, I first considered what this quiz should look like and how users will interact with it. With this in mind, I decided on using the cloud-based design tool Figma to visualise the graphical user interface and simulate the customer journey. Below is the completed diagram.
 <img width="1523" height="754" alt="Figma Board" src="https://github.com/user-attachments/assets/19dd41c4-100a-4fb1-ace1-c94f550b72ab" />
-**Figure 1:** [Wireframe](https://www.figma.com/design/N2lCCsXgoQUMk3etvyxnPV/Phishing-Quiz-GUI-Design?node-id=0-1&t=H2QeXzAVHVivouVx-1) developed on Figma
+**Figure 4:** _[Wireframe](https://www.figma.com/design/N2lCCsXgoQUMk3etvyxnPV/Phishing-Quiz-GUI-Design?node-id=0-1&t=H2QeXzAVHVivouVx-1) developed on Figma_
 
 Before building this visualisation I gathered examples of current Buckinghamshire Council employee training course and elected to use a similar layout and the exact colours used to represent the organisation. This ensures that it follows the brand guidelines as well as being recognisable to internal staff as a Buckinghamshire Council product. Designing the first frame of the quiz was the most important as it would set a design precedent that all following GUI frames, buttons and labels would need to adhere to maintain the integrity of the not only the quiz design but also the brand image. As the data this quiz generates needs to be stored permanently, it is vital that the user is required to enter the necessary information before being able to move on. Therefore, this first frame needed to be easy to understand and linear to reduce chances users become lost, as a result I decided to include only a quiz header, username entry field as well as a help button. The quiz header and help button are static elements which appear in all stages of the quiz. Once the user enters their name, they can select the enter button to confirm the name and move on to the quiz.
 
@@ -42,7 +47,7 @@ After designing the initial layout, the next step was to consider the style of q
 
 <img width="600" height="350" alt="image" src="https://github.com/user-attachments/assets/2ac898d2-101f-47ec-a18e-a4e78ad78d7e" />
 
-**Figure 2:** Functional and Non-functional requirements table
+**Figure 5:** _Functional and Non-functional requirements table_
 
 ### Technical Stack Outline
 
@@ -90,7 +95,7 @@ The information the user enters will be stored in a .csv file due to their text 
 
 <img width="1278" height="1297" alt="image" src="https://github.com/user-attachments/assets/d90ba002-1b93-41d2-9130-834d5a68a2ec" />
 
-**Figure 3:** Class diagram developed on draw.io
+**Figure 6:** _Class diagram developed on draw.io_
 
 ## Development
 
@@ -238,14 +243,17 @@ self.destroy()
 
 To test the code and functions of the script, I elected to use Pythons inbuilt unit testing framework. This is to reduce the amount libraries the need to be installed and imported into the code. I used a combination of automated and manual tests to ensure that any errors are caught before they have the opportunity to cause issues. To begin I performed a basic smoke test and uploaded to GitHub to confirm the core functionality was working as intended and the CI pipeline.
 <img width="1500" height="578" alt="image" src="https://github.com/user-attachments/assets/dfc4955e-cb31-4d11-bf8a-887e6a7ce684" />
+**Figure 7:** _Smoke test completed on VScode and confirmation of continous integration pipeline_
 
 Once the smoke tests were confirmed to be passing, I began writing unit tests for the username entry field. This was to ensure that the name users’ input could not be unexpected or result in an error.
 <img width="671" height="799" alt="image" src="https://github.com/user-attachments/assets/32531a69-073e-4b2c-a953-26b8c3703cb0" />
+**Figure 8:** _Automated unit uests using example user inputs, built on VScode_
 
 As we can see from the passing tests, names cannot have numbers or special characters but most importantly it does allow for names with hyphens separating them.
 
 Before incorporating the quiz_questions() function into the main code, it was important that I validate whether the function generates an output to do this with a unit test I wrote the following test case.
 <img width="617" height="598" alt="image" src="https://github.com/user-attachments/assets/74ffd76c-a57e-4faa-9676-66f86b87dece" />
+**Figure 9:** _Automated unit test confirming presence of data within the quiz_questions function, built on VScode_
 
 Below are the results of the manual testing performed
 
@@ -253,9 +261,11 @@ Below are the results of the manual testing performed
 
 <img width="566" height="819" alt="image" src="https://github.com/user-attachments/assets/c5a67662-1d8b-4373-8ee2-822b7e359497" />
 
-**Figure 4:** Manual testing 
+**Figure 10:** _Manual testing_
 
 ## Technical Documentation
+
+### Cloning the repo
 
 ## Evaluation
 
