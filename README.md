@@ -39,9 +39,9 @@ To begin designing this quiz, I first considered what this quiz should look like
 <img width="1523" height="754" alt="Figma Board" src="https://github.com/user-attachments/assets/19dd41c4-100a-4fb1-ace1-c94f550b72ab" />
 **Figure 4:** _[Wireframe](https://www.figma.com/design/N2lCCsXgoQUMk3etvyxnPV/Phishing-Quiz-GUI-Design?node-id=0-1&t=H2QeXzAVHVivouVx-1) developed on Figma_
 
-Before building this visualisation I gathered examples of current Buckinghamshire Council employee training course and elected to use a similar layout and the exact colours used to represent the organisation. This ensures that it follows the brand guidelines as well as being recognisable to internal staff as a Buckinghamshire Council product. Designing the first frame of the quiz was the most important as it would set a design precedent that all following GUI frames, buttons and labels would need to adhere to maintain the integrity of the not only the quiz design but also the brand image. As the data this quiz generates needs to be stored permanently, it is vital that the user is required to enter the necessary information before being able to move on. Therefore, this first frame needed to be easy to understand and linear to reduce chances users become lost, as a result I decided to include only a quiz header, username entry field as well as a help button. The quiz header and help button are static elements which appear in all stages of the quiz. Once the user enters their name, they can select the enter button to confirm the name and move on to the quiz.
+Before building this visualisation I gathered examples of current Buckinghamshire Council employee training course and elected to use a similar layout and the exact colours used to represent the organisation. This ensures that it follows the brand guidelines as well as being recognisable to internal staff as a Buckinghamshire Council product. Designing the first frame of the quiz was the most important as it would set a design precedent that all following frames, buttons and labels would need to adhere to maintain a consistent design philosophy. As the data this quiz generates needs to be stored permanently, it is vital that the user is required to enter the necessary information before being able to move on. Therefore, this first frame needed to be easy to understand and linear to reduce chances users become lost, as a result I decided to include only a quiz header, username entry field as well as a help button. Once the user enters their name, they can select the enter button to confirm the name and move on to the quiz.
 
-After designing the initial layout, the next step was to consider the style of question the quiz would ask. Again, I took references from existing training courses and found the majority of them use multiple-choice style questions to test users’ knowledge, therefore the logical choice would be to create my quiz as multiple-choice as it should be an easily recognisable format to the majority of users. Once the user has selected an answer to each question, they will be able to select a submit button to record their information and end the quiz. The overall user journey is very linear and leaves little room for confusion or misunderstanding.
+After designing the initial layout, the next step was to consider the style of question the quiz would ask. Again, I took references from existing training courses and found the majority of them use multiple-choice style questions to test users’ knowledge, therefore the logical choice would be to create my quiz as multiple-choice as it should be an easily recognisable format to the majority of users. Once the user has selected an answer to each question, they will be able to select a submit button to record their information and end the quiz.
 
 ### Functional and non-functional requirements
 
@@ -55,7 +55,7 @@ After designing the initial layout, the next step was to consider the style of q
 
 - Python
 
-The program will be built entirely within python due to its ability to write clear modular code and utilise tkinter to create graphical user interfaces.
+The program will be built entirely within python due to its support of modular code and tkinter integration used to create graphical user interfaces.
 
 <ins>Libraries</ins>
 
@@ -126,7 +126,7 @@ def load_questions(filepath="quiz_questions.csv"):
 
     return questions
 ```
-The reader variable ensures the script is only reading the csv and not making and changes to it. The dictionary (questions) creates a key for each row in the questions column, and each question is assigned the value of the options in the same row, this results in a dictionary with 5 distinct questions ready for the main file to call upon. With this module complete, the quiz can now be developed.
+The reader variable ensures the script is only reading the csv and not making and changes to it. The dictionary (questions) creates a key for each row in the questions column, and each question is assigned the value of the options in the same row, this results in a dictionary with 5 distinct questions ready for the main file to call upon.
 
 The primary file is called phishing_quiz.py and contains the rest of the code necessary for the quiz to function. To begin I imported the quiz_questions module and defined a variable which is assigned the function which creates the questions dictionary.
 ```python
@@ -134,20 +134,12 @@ from quiz_questions import load_questions #Gets the quiz questions from quiz_que
 
 questions = load_questions()
 ```
-All of the remaining code sits within a super class, PhishingQuiz, this allows me to access methods in the super class in all sub classes and definitions. The class contains the questions variable, allowing it to be called wherever needed.
+All of the remaining code sits within a super class, PhishingQuiz, this allows me to access methods in the super class in all sub classes and definitions. The class contains the questions variable, allowing child definitions and classes to call it.
 ```python
 class PhishingQuiz(tk.Tk):
 
     def __init__(self, questions):
         super().__init__()
-```
-A set of variables are defined within the super class and initialised for use within definitions that will be created later.
-```python
-self.username = tk.StringVar()
-self.questions = questions
-self.current_question = 0
-self.results = tk.IntVar(value=0)
-self.var_results = []
 ```
 The following code block creates and places the help button on the GUI. The button is locked to the top left and is a persistent element which will not move or change.
 ```python
